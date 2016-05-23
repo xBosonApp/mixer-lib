@@ -1,0 +1,446 @@
+[2015-02-05 15:14:40.620] [INFO] ALL - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:14:40.620] [INFO] ALL - Listening on { address: '0.0.0.0', family: 'IPv4', port: 80 }
+[2015-02-05 15:14:54.276] [INFO] ALL - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:14:54.276] [INFO] ALL - Listening on { address: '0.0.0.0', family: 'IPv4', port: 80 }
+[2015-02-05 15:15:34.273] [INFO] ALL - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:15:34.273] [INFO] ALL - Listening on { address: '0.0.0.0', family: 'IPv4', port: 80 }
+[2015-02-05 15:16:02.569] [INFO] ALL - 启动集群 4
+[2015-02-05 15:16:03.054] [INFO] ALL[524] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:16:03.054] [INFO] ALL[2476] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:16:03.069] [INFO] ALL[524] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:16:03.069] [INFO] ALL[2476] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:16:03.054] [INFO] ALL[6096] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:16:03.070] [INFO] ALL[6096] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:16:03.069] [INFO] ALL[2908] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:16:03.085] [INFO] ALL[2908] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:16:29.666] [DEBUG] ALL[2908] - /c  >>> [ /c ]
+[2015-02-05 15:16:29.687] [DEBUG] ALL[2908] - /favicon.ico  >>> [ / ]
+[2015-02-05 15:16:37.637] [DEBUG] ALL[2908] - /c/fdsafe  >>> [ /c ]
+[2015-02-05 15:16:37.709] [DEBUG] ALL[2908] - /favicon.ico  >>> [ / ]
+[2015-02-05 15:17:43.334] [INFO] ALL - 启动集群 4
+[2015-02-05 15:17:43.843] [INFO] ALL[2772] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:17:43.861] [INFO] ALL[2772] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:17:43.859] [INFO] ALL[4060] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:17:43.868] [INFO] ALL[4060] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:17:43.868] [INFO] ALL[3652] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:17:43.884] [INFO] ALL[3652] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:17:43.884] [INFO] ALL[7976] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:17:43.884] [INFO] ALL[7976] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:17:46.637] [DEBUG] ALL[7976] - [ /c ] <<< 	 /c/fdsafe
+[2015-02-05 15:17:46.664] [DEBUG] ALL[7976] - [ / ] <<< 	 /favicon.ico
+[2015-02-05 15:18:02.885] [INFO] ALL - 启动集群 4
+[2015-02-05 15:18:03.370] [INFO] ALL[188] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:18:03.385] [INFO] ALL[188] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:18:03.385] [INFO] ALL[8152] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:18:03.401] [INFO] ALL[8152] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:18:03.385] [INFO] ALL[1624] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:18:03.401] [INFO] ALL[1624] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:18:03.400] [INFO] ALL[4108] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:18:03.416] [INFO] ALL[4108] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:18:05.568] [DEBUG] ALL[4108] - [ /c ]	<<< /c/fdsafe
+[2015-02-05 15:18:05.606] [DEBUG] ALL[4108] - [ / ]	<<< /favicon.ico
+[2015-02-05 15:18:25.396] [INFO] ALL - 启动集群 4
+[2015-02-05 15:18:25.880] [INFO] ALL[6316] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:18:25.880] [INFO] ALL[6316] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:18:25.880] [INFO] ALL[6328] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:18:25.880] [INFO] ALL[7732] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:18:25.896] [INFO] ALL[6328] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:18:25.896] [INFO] ALL[7732] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:18:25.911] [INFO] ALL[7944] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:18:25.911] [INFO] ALL[7944] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:18:27.452] [DEBUG] ALL[7944] - [ /c 	]<<< /c/fdsafe
+[2015-02-05 15:18:27.474] [DEBUG] ALL[7944] - [ / 	]<<< /favicon.ico
+[2015-02-05 15:18:40.762] [INFO] ALL - 启动集群 4
+[2015-02-05 15:18:41.262] [INFO] ALL[6400] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:18:41.278] [INFO] ALL[6400] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:18:41.262] [INFO] ALL[6640] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:18:41.278] [INFO] ALL[6640] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:18:41.278] [INFO] ALL[2332] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:18:41.294] [INFO] ALL[2332] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:18:41.294] [INFO] ALL[3912] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:18:41.294] [INFO] ALL[3912] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:18:43.374] [DEBUG] ALL[3912] - [ /c 	] <<< /c/fdsafe
+[2015-02-05 15:18:43.422] [DEBUG] ALL[3912] - [ / 	] <<< /favicon.ico
+[2015-02-05 15:20:02.578] [INFO] ALL - 启动集群 4
+[2015-02-05 15:20:03.001] [WARN] ALL[2184] - 注册了根路由 '/' !!! 
+[2015-02-05 15:20:03.063] [INFO] ALL[2184] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:20:03.063] [INFO] ALL[2184] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:20:03.001] [WARN] ALL[6816] - 注册了根路由 '/' !!! 
+[2015-02-05 15:20:03.001] [WARN] ALL[1576] - 注册了根路由 '/' !!! 
+[2015-02-05 15:20:03.063] [INFO] ALL[6816] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:20:03.063] [INFO] ALL[6816] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:20:03.063] [INFO] ALL[1576] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:20:03.079] [INFO] ALL[1576] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:20:03.016] [WARN] ALL[5220] - 注册了根路由 '/' !!! 
+[2015-02-05 15:20:03.078] [INFO] ALL[5220] - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:20:03.078] [INFO] ALL[5220] - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:20:20.079] [WARN] ALL - 注册了根路由 '/' !!! 
+[2015-02-05 15:20:20.110] [INFO] ALL - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:20:20.126] [INFO] ALL - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:20:24.075] [DEBUG] ALL - [ /c 	] <<< /c/fdsafe
+[2015-02-05 15:20:24.098] [DEBUG] ALL - [ / 	] <<< /favicon.ico
+[2015-02-05 15:20:26.521] [DEBUG] ALL - [ /c 	] <<< /c/fdsafe
+[2015-02-05 15:20:26.572] [DEBUG] ALL - [ / 	] <<< /favicon.ico
+[2015-02-05 15:32:58.331] [WARN] ALL - 注册了根路由 '/' !!! 
+[2015-02-05 15:32:58.347] [INFO] ALL - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:32:58.362] [INFO] ALL - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:33:10.421] [DEBUG] ALL - [ /c 	] <<< /c/fdsafe
+[2015-02-05 15:33:10.440] [DEBUG] ALL - [ / 	] <<< /favicon.ico
+[2015-02-05 15:33:10.441] [INFO] ALL - invalid path: /
+[2015-02-05 15:35:16.996] [WARN] ALL - 注册了根路由 '/' !!! 
+[2015-02-05 15:35:17.027] [INFO] ALL - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-05 15:35:17.027] [INFO] ALL - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-05 15:35:18.417] [DEBUG] ALL - [ /c 	] <<< /c/fdsafe
+[2015-02-05 15:35:18.443] [DEBUG] ALL - [ / 	] <<< /favicon.ico
+[2015-02-26 15:54:51.828] [WARN] ALL - 注册了根路由 '/' !!! 
+[2015-02-26 15:54:52.125] [INFO] ALL - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-26 15:54:52.140] [INFO] ALL - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-26 15:55:06.712] [WARN] ALL - 注册了根路由 '/' !!! 
+[2015-02-26 15:55:06.744] [INFO] ALL - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-26 15:55:06.744] [INFO] ALL - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-02-26 15:59:14.554] [WARN] ALL - 注册了根路由 '/' !!! 
+[2015-02-26 15:59:14.585] [INFO] ALL - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-02-26 15:59:14.601] [INFO] ALL - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-03-01 09:17:57.888] [WARN] ALL - 注册了根路由 '/' !!! 
+[2015-03-01 09:17:58.091] [INFO] ALL - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-03-01 09:17:58.091] [INFO] ALL - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-04-13 16:20:40.875] [WARN] ALL - 注册了根路由 '/' !!! 
+[2015-04-13 16:20:41.156] [INFO] ALL - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-04-13 16:20:41.156] [INFO] ALL - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-05-15 17:23:17.047] [WARN] ALL - 注册了根路由 '/' !!! 
+[2015-05-15 17:23:17.487] [INFO] ALL - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
+[2015-05-15 17:23:17.503] [INFO] ALL - Listening on { address: '0.0.0.0', family: 'IPv4', port: 81 }
+[2015-07-17 10:02:21.865] [INFO] ALL - routes:  [ '/tt',
+  '/tt/a',
+  '/t1',
+  '/a/b/c',
+  '/c',
+  '/b',
+  '/c/d',
+  '/',
+  '/s',
+  '/tk' ]
