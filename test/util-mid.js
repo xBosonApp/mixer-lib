@@ -1,11 +1,12 @@
-var mix = require('../index.js');
-var mid = mix.util.mid();
-var express = require('express');
+var mixer = require('../index.js');
+var mid = mixer.util.mid();
 
-var app = express();
 
-app.use(mid.ex_static('./test', '/a'));
-
-app.use('/cron/log', mid.ex_log());
-
-app.listen(8000);
+mixer.auto_init(function whenLoad(app_pool, exdata, config) {
+  // http://localhost:81/file/1.html
+  app_pool.addApp(mid.ex_static('./test'), '/file');
+  // http://localhost:81/log
+  app_pool.addApp(mid.ex_log(), '/log');
+  // http://localhost:81/reload 
+  app_pool.addApp(mid.ex_reload(app_pool), '/reload');
+});

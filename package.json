@@ -1,24 +1,24 @@
 {
-  "name": "mixer-lib",
-  "version": "0.1.50",
-  "description": "兼容多种服务器框架到单个http中, 提供 Utils",
-  "main": "index.js",
-  "scripts": {
-    "test": "node demo/test.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "private"
-  },
-  "author": "jym",
-  "license": "ISC",
-  "dependencies": {
-    "configuration-lib": "^0.2.1",
-    "logger-lib": "^0.1.6"
-  },
-  "devDependencies": {
-    "masquerade-html-lib": "*",
-    "express": "^4.12.2",
-    "mime": "^1.3.4"
-  }
+    "name": "mixer-lib",
+    "version": "0.2.4",
+    "description": "兼容多种服务器框架到单个http中, 提供 Utils",
+    "main": "index.js",
+    "scripts": {
+        "test": "node test/demo.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "private"
+    },
+    "author": "jym",
+    "license": "ISC",
+    "dependencies": {
+        "configuration-lib": "^0.2.1",
+        "logger-lib": "^0.3"
+    },
+    "devDependencies": {
+        "masquerade-html-lib": "*",
+        "express": "^4.12.2",
+        "mime": "^1.3.4"
+    }
 }

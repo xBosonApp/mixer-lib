@@ -1,165 +1,244 @@
 # 系统集成库
-> 使用案例在 demo 目录
-> ! 不重启应用脚本修改
-> 便捷方法/类
+ 
+使用本库可以把多个分散的项目集成到一个 http 服务器中, 而不需要修改项目代码.
 
 
-* 安装
+# 安装
 
 `npm install mixer-lib`
 
 
-* 使用
+# 配置对象
 
 ```js
-//
-// 引入库
-//
+var conf = {
+  port      : 81,        // http 端口
+  cluster   : false,     // 启用集群, 可以设置集群数量, 或设置为 true 则根据 cpu 核心数量
+  whenLoad  : Function   // 这个对象必须设置
+  ssl : {                  // 使用 https 创建服务器需要的选项, 
+    key: 'privatekey.pem', // 完整的文件路径
+    cert: 'certificate.pem',
+  }
+}
+```
+
+
+# 使用1 (<=0.1 版本支持)
+
+```js
 var mixer = require('mixer-lib');
+mixer.create_http_mix_server({ whenLoad : whenLoad });
 
-//
-// 创建应用
-//
-mixer.create_http_mix_server({ 
-    whenLoad : whenLoad, 
-    port     : port,
-    /* 使用 https 创建服务器需要的选项, 
-    ssl : {
-        key: 'privatekey.pem'',
-        cert: 'certificate.pem',
-    }
-    */
-}, exdata -- SomeObject {});
-
-//
-// 创建应用时, 该函数会被回调
-// exdata 即是调用 create_http_mix_server 时传入的参数
-//
 function whenLoad(app_pool, exdata) {
-    //
-    // 创建应用, 如果应用返回一个 express 对象
-    // 使用 mixer.express() 把应用插入混合器
-    // 最后用 route.add() 告知混合器, 应用使用了那些路径
-    //
     var sinopia_app = sinopia(config);
     var sinopia_route = app_pool.addApp(mixer.express(sinopia_app));
     sinopia_route.add('/');
 
-    //
-    // mixer.native() 把 http/https 原生应用插入混合器
-    //
-    var manager_app = xxxx();
-    var mana_route = app_pool.addApp( mixer.native( manager_app ) );
-    mana_route.add('/-/mana');
-
-    //
-    // 删除路径对应的应用
-    //
-    app_pool.removeApp('/');
-
-    //
-    // 重新加载 whenLoad 方法, 之前的应用都被删除
-    // 并且会从文件系统重新读取程序代码
-    //
-    app_pool.reload();
+    var mana_route = app_pool.addApp([some_function], '/some');
 }
-
 ```
+
+
+# 使用2 (>=0.2 版本支持)
+
+相比[使用1]是更方便的 api.
+
+```js
+var mixer = require('mixer-lib');
+mixer.auto_init(whenLoad, ext_data);
+
+function whenLoad(app_pool, exdata, config) {
+    app_pool.addApp(Function, route_path);
+}
+```
+
 
 # HTTPS 认证密钥的生成
 
-生成私钥key文件：
-openssl genrsa -out privatekey.pem 1024
+生成私钥key文件  
+`openssl genrsa -out privatekey.pem 1024`
 
-通过私钥生成CSR证书签名
-openssl req -new -key privatekey.pem -out certrequest.csr
+通过私钥生成CSR证书签名  
+`openssl req -new -key privatekey.pem -out certrequest.csr`
 
-通过私钥和证书签名生成证书文件
-openssl x509 -req -in certrequest.csr -signkey privatekey.pem -out certificate.pem
-
-
-***
-# UTIL 工具
-
-## NET package
-
-`var net = mixer.util.net();`
+通过私钥和证书签名生成证书文件  
+`openssl x509 -req -in certrequest.csr -signkey privatekey.pem -out certificate.pem`
 
 
-* 使用 utf8 编码发送 HTTP.GET 请求
-* _url -- 请求url
-* parm -- 参数对象 JSON
-* cb   -- 完成后的回调: function(err, dataObj)
-* dataObj 使用参考 DATA 包
+# Events
 
-`net.get(_url, parm, cb)`
+## app_pool 可能发出的消息
 
+#### beforeFirstLoad
 
-* 使用 utf8 编码发送 HTTP.POST 请求
-* _url -- 请求url
-* parm -- 参数对象 JSON
-* cb   -- 完成后的回调: function(err, dataObj)
-* dataObj 使用参考 DATA 包
+    服务器第一次启动之前发出的消息
 
-`net.post(_url, parm, cb)`
+#### afterFirstLoad
 
+    服务器第一次启动之后发出的消息
 
-***
+#### beforeEnd
 
-## DATA package
+    在服务器准备停止之前发出
 
-`var data = mixer.util.data();`
+#### afterReload
 
+    在服务器重新加载之后发出
 
-* 创建一个数据包装器
-* 不要修改包装器 *返回的对象*, 如果需要自行缓存这些对象
+#### err_no_start
 
-构造: 参数必须为字符串:
-`var d = data.fromTxt('some')`
-
-构造: 参数必须是对象
-`var d = data.fromObj({b:1234})`
- 
-构造: 参数必须是 xml 字符串
-`var d = data.fromXml("<xml .../>")`
+    服务器启动失败
 
 
-* 返回原始字符串
-`var r = d.txt()`
+# API
 
-* 返回解析后的 OBJECT, 失败返回 null
-`var r = d.obj()`
+#### function whenLoad(app_pool, exdata, config)
 
-* 返回 XML 字符串, 失败返回 null
-`var r = d.xml()`
+    服务器启动/重启时的回调函数, 在函数中使用 app_pool 添加应用.
+    * app_pool -- 用来注册服务/应用
+    * exdata   -- 调用 auto_init()/create_http_mix_server() 时传入的参数
+    * config   -- 全局配置文件
+    
+#### Function serviceApp(request, response, next)
+
+    应用/服务函数前面, 可用 app_pool 插入混合器, 当与之关联的路由被请求时回调.
+    request/response 与 http 库中的相同;
+    request.base 增加的属性, 用于指明调用当前服务时匹配的根路径
+    next:Function(err, msg) 被调用后会执行默认应当给客户端, 设置 err 返回 500,
+    只设置 msg 返回字符串, 否则返回 404.
+
+#### mixer.create_http_mix_server(config [, ex_data])
+
+    创建并启动服务器; config.whenLoad 函数必须设置. 
+
+#### mixer.write_pid(config)
+
+    内部函数
+
+#### mixer.auto_init(whenLoad [, ext_data]);
+
+    如果调用该方法的模块是全局根模块, 则会启动 http 服务
+    并读取全局配置文件 (参考 configuration-lib 的 lib.auto_init(...))
+    否则不会启动服务, 但会尝试导出 whenLoad 函数. 日志中会有记录.
+
+#### app_pool.addApp(serviceApp [, path_string])
+
+    将应用插入混合器, 并返回 route 对象用来设置路由;
+    或设置 path_string 参数来设置路由路径, 这样可以更方便, 切不需要 route 对象.
+    
+#### app_pool.reload()
+
+    重新启动服务器并从磁盘重新加载代码 
+    (条件: 重新加载的代码必须在 whenLoad 函数中被 require)
+    
+#### app_pool.removeApp(route_path)
+
+    删除路径对应的应用/服务; 如果应用注册了多个路由, 哪些路由仍然有效.
+
+#### route.add(path_string | array | route_saver)
+
+    route 是与应用关联的路由设置器, 允许设置多个路由.
+    
+#### mixer.create_route_saver()
+
+    创建路由保存器 reoute_saver 可以通过 route.add 插入路由表中.
+    reoute_saver(path) 可以添加新路由.
+    
+#### mixer.native(Function app())
+#### mixer.express(Function app())
+#### mixer.thinkjs(config)
+#### mixer.dish(Function app())
+
+    这些方法用来把为针对特定中间件api写的app转换为 mixer api 的中间件.
+    返回的对象可以直接调用 app_pool.addApp(...)
+    (你确定要用 thinkjs ?!) 
 
 
-***
+## UTIL 工具
 
+    工具库在不使用时并不加载, 不会占用资源
 
-## MID package
+### var net = mixer.util.net()
 
-```javascript
-var mid = mix.util.mid();
-var app = require('express')();
-```
+    创建网络工具, http 库不支持传递 header.
 
+#### net.get(_url, parm, cb)
 
-### ex_static 静态文件服务 
-> 并不推荐使用, 用 masquerade 替代
+    * 使用 utf8 编码发送 HTTP.GET 请求
+    * _url -- 请求url
+    * parm -- 参数对象 JSON
+    * cb   -- 完成后的回调: function(err, dataObj)
+    * dataObj 使用参考 DATA 包
 
-`app.use(mid.ex_static('./test', '/a'));`
+#### net.post(_url, parm, cb)
 
-* 映射一个 url 前缀到本地目录, 该 url 后的所有请求返回该本地目录中的文件
-* localpath - 本地路径
-* url_prefix - url 的前缀
-`ex_static(localpath, url_prefix)`
+    * 使用 utf8 编码发送 HTTP.POST 请求
+    * _url -- 请求url
+    * parm -- 参数对象 JSON
+    * cb   -- 完成后的回调: function(err, dataObj)
+    * dataObj 使用参考 DATA 包
 
+### var data = mixer.util.data();
 
-### ex_log 日志查看服务 (该服务的实现在 logger-lib 中)
+    创建一个数据包装器  
+    不要修改包装器 *返回的对象*, 如果需要自行缓存这些对象
 
-`app.use('/cron/log', mid.ex_log('log'));`
+    构造: 参数必须为字符串:  
+    `var d = data.fromTxt('some')`
 
-* 通过 log 接口查看日志
-* servicename - 接口服务名
-`ex_static(servicename)`
+    构造: 参数必须是对象  
+    `var d = data.fromObj({b:1234})`
+     
+    构造: 参数必须是 xml 字符串  
+    `var d = data.fromXml("<xml .../>")`
+    
+#### var r = d.txt()
+
+    返回原始字符串
+    
+#### var r = d.obj()
+    
+    返回解析后的 OBJECT, 失败返回 null
+
+#### var r = d.xml()
+    
+    返回 XML 字符串, 失败返回 null
+
+### var mid = mixer.util.mid()
+
+    返回中间件库 MID package
+
+#### mid.ex_static(localpath, url_prefix)
+
+    localpath  - 本地路径  
+    url_prefix - url 的前缀  
+    映射一个 url 前缀到本地目录, 该 url 后的所有请求返回
+    该本地目录中的文件; 并不推荐, 用 masquerade 替代.
+
+#### mid.ex_log(bootstrap)
+
+    ex_log 日志查看服务 (该服务的实现在 logger-lib 中),
+    bootstrap 的说明见 logger-lib 库.
+    
+#### mid.ex_reload(app_pool)
+
+    重启服务, 密码在控制台生成
+
+### var lifecycle = mixer.util.lifecycle()
+
+    加载可中断定时器库, 与 setInterval 定时器不同, 该定时器通过外部中断可以
+    让回调延迟到下一个周期中.
+    
+#### lcobj = lifecycle(interval_seconds, task_func)
+
+    创建一个定时器实例, 每间隔 interval_seconds 秒调用一次 task_func.
+    
+#### lcobj.update(); lcobj.interrupt(); lcobj.skip();
+
+    这些函数都是中断定时器, 使回调函数从调用时间点延迟一个周期.
+    
+#### lcobj.stop(); lcobj.kill(); lcobj.end();
+
+    这些函数都是终止定时器, 释放资源.
+    
+    
