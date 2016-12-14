@@ -1,25 +1,42 @@
 # 系统集成库
- 
+
 使用本库可以把多个分散的项目集成到一个 http 服务器中, 而不需要修改项目代码.
 
 
 # 安装
 
-`npm install mixer-lib`
+`npm install mixer-lib --save`
 
 
 # 配置对象
 
+配置文件在 ./config/config.js 中定义相同, 但配置文件无法设置 whenLoad,
+编程配置优先于文件配置, 空余项可以被文件配置补充;
+不推荐使用 nodejs 的 ssl, nginx 做代理加入 ssl 模块效率更高;
+
 ```js
 var conf = {
-  port      : 81,        // http 端口
-  cluster   : false,     // 启用集群, 可以设置集群数量, 或设置为 true 则根据 cpu 核心数量
-  whenLoad  : Function   // 这个对象必须设置
-  ssl : {                  // 使用 https 创建服务器需要的选项, 
-    key: 'privatekey.pem', // 完整的文件路径
-    cert: 'certificate.pem',
+  // HTTP 服务端口号
+  port      : 81,  
+
+  // 集群配置:
+  //  5     设置为5个进程;
+  //  0.5   使用一半数量的处理器,
+  //  -2    留出 2 个空闲处理器
+  //  true  使用全部处理器, 或设置 0
+  //  false 单进程
+  cluster   : false,
+
+  // 这个参数必须设置
+  whenLoad  : Function   
+
+  // 使用 https 创建服务器需要的选项,
+  ssl : {     
+    // 完整的文件路径             
+    key  : 'privatekey.pem',
+    cert : 'certificate.pem',
   }
-}
+};
 ```
 
 
@@ -89,8 +106,14 @@ function whenLoad(app_pool, exdata, config) {
 
     服务器启动失败
 
+#### error
+
+    进入服务状态后发生的错误
+
 
 # API
+
+`./test/demo.js` 中有可立即运行的代码
 
 #### function whenLoad(app_pool, exdata, config)
 
@@ -98,7 +121,7 @@ function whenLoad(app_pool, exdata, config) {
     * app_pool -- 用来注册服务/应用
     * exdata   -- 调用 auto_init()/create_http_mix_server() 时传入的参数
     * config   -- 全局配置文件
-    
+
 #### Function serviceApp(request, response, next)
 
     应用/服务函数前面, 可用 app_pool 插入混合器, 当与之关联的路由被请求时回调.
@@ -109,7 +132,7 @@ function whenLoad(app_pool, exdata, config) {
 
 #### mixer.create_http_mix_server(config [, ex_data])
 
-    创建并启动服务器; config.whenLoad 函数必须设置. 
+    创建并启动服务器; config.whenLoad 函数必须设置.
 
 #### mixer.write_pid(config)
 
@@ -125,25 +148,29 @@ function whenLoad(app_pool, exdata, config) {
 
     将应用插入混合器, 并返回 route 对象用来设置路由;
     或设置 path_string 参数来设置路由路径, 这样可以更方便, 切不需要 route 对象.
-    
+
 #### app_pool.reload()
 
-    重新启动服务器并从磁盘重新加载代码 
+    重新启动服务器并从磁盘重新加载代码
     (条件: 重新加载的代码必须在 whenLoad 函数中被 require)
-    
+
 #### app_pool.removeApp(route_path)
 
-    删除路径对应的应用/服务; 如果应用注册了多个路由, 哪些路由仍然有效.
+    删除路径对应的应用/服务; 如果应用注册了多个路由, 哪些路由仍然有效
+
+#### app_pool.on(eventName, callback)
+
+    接收服务器发来的事件
 
 #### route.add(path_string | array | route_saver)
 
     route 是与应用关联的路由设置器, 允许设置多个路由.
-    
+
 #### mixer.create_route_saver()
 
     创建路由保存器 reoute_saver 可以通过 route.add 插入路由表中.
     reoute_saver(path) 可以添加新路由.
-    
+
 #### mixer.native(Function app())
 #### mixer.express(Function app())
 #### mixer.thinkjs(config)
@@ -151,7 +178,7 @@ function whenLoad(app_pool, exdata, config) {
 
     这些方法用来把为针对特定中间件api写的app转换为 mixer api 的中间件.
     返回的对象可以直接调用 app_pool.addApp(...)
-    (你确定要用 thinkjs ?!) 
+    (你确定要用 thinkjs ?!)
 
 
 ## UTIL 工具
@@ -188,20 +215,20 @@ function whenLoad(app_pool, exdata, config) {
 
     构造: 参数必须是对象  
     `var d = data.fromObj({b:1234})`
-     
+
     构造: 参数必须是 xml 字符串  
     `var d = data.fromXml("<xml .../>")`
-    
+
 #### var r = d.txt()
 
     返回原始字符串
-    
+
 #### var r = d.obj()
-    
+
     返回解析后的 OBJECT, 失败返回 null
 
 #### var r = d.xml()
-    
+
     返回 XML 字符串, 失败返回 null
 
 ### var mid = mixer.util.mid()
@@ -219,7 +246,7 @@ function whenLoad(app_pool, exdata, config) {
 
     ex_log 日志查看服务 (该服务的实现在 logger-lib 中),
     bootstrap 的说明见 logger-lib 库.
-    
+
 #### mid.ex_reload(app_pool)
 
     重启服务, 密码在控制台生成
@@ -228,17 +255,15 @@ function whenLoad(app_pool, exdata, config) {
 
     加载可中断定时器库, 与 setInterval 定时器不同, 该定时器通过外部中断可以
     让回调延迟到下一个周期中.
-    
+
 #### lcobj = lifecycle(interval_seconds, task_func)
 
     创建一个定时器实例, 每间隔 interval_seconds 秒调用一次 task_func.
-    
+
 #### lcobj.update(); lcobj.interrupt(); lcobj.skip();
 
     这些函数都是中断定时器, 使回调函数从调用时间点延迟一个周期.
-    
+
 #### lcobj.stop(); lcobj.kill(); lcobj.end();
 
     这些函数都是终止定时器, 释放资源.
-    
-    

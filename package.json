@@ -1,6 +1,6 @@
 {
     "name": "mixer-lib",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "description": "兼容多种服务器框架到单个http中, 提供 Utils",
     "main": "index.js",
     "scripts": {
