@@ -23,6 +23,7 @@ function whenLoad(app_pool) {
 
   app_pool.on('afterFirstLoad', function() {
     logger.info("routes: ", app_pool.route_list());
+		logger.info('app_pool.port', app_pool.port);
   });
 };
 
