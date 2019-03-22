@@ -7,12 +7,14 @@
 
 `npm install mixer-lib --save`
 
+该项目没有加入 npm 公共服务器, 如需需要请自行搞定..
+
 
 # 配置对象
 
 配置文件在 ./config/config.js 中定义相同, 但配置文件无法设置 whenLoad,
 编程配置优先于文件配置, 空余项可以被文件配置补充;
-不推荐使用 nodejs 的 ssl, nginx 做代理加入 ssl 模块效率更高;
+~~不推荐使用 nodejs 的 ssl, nginx 做代理加入 ssl 模块效率更高;~~
 
 ```js
 var conf = {
@@ -104,11 +106,13 @@ function whenLoad(app_pool, exdata, config) {
 
 #### err_no_start
 
-    服务器启动失败
+    服务器启动失败, 如果没有对应的监听器将抛出异常到调用 create_http_mix_server 处,
+    此时进程可能终止.
 
 #### error
 
-    进入服务状态后发生的错误
+    进入服务状态后发生的错误, 如果发生 EADDRINUSE (端口被占用服务不能启动) 错误,
+    且没有监听器监听 error 事件, 则进程会退出, 退出码 98
 
 
 # API
@@ -132,17 +136,33 @@ function whenLoad(app_pool, exdata, config) {
 
 #### mixer.create_http_mix_server(config [, ex_data])
 
-    创建并启动服务器; config.whenLoad 函数必须设置.
+    创建并启动服务器; config.whenLoad 函数必须设置.  
+    在加密项目中 (program-crypto-lib) 调用该方法会在日志中写入授权信息, 通常也会打印到屏幕上.
 
 #### mixer.write_pid(config)
 
     内部函数
+
+#### mixer.cluster_manager(conf, master_function, slaver_function)
+
+    集群管理器, 按照 conf.thcount 数量启动集群; conf.run_on_listenning == true,
+    则在前一个进程启动 tcp 监听后启动新进程, 否则在前一个进程启动后立即启动新进程.
+
+    master_function(config) 主进程任务函数, config 为全局配置文件, 主线程会更新配置文件.
+    slaver_function(config, address, worker, auto_port) 非主进程任务函数, 副进程不会更新配置文件,
+
+    address 为上一个副进程启动后启动 http 服务的地址.
+    auto_port 用来在集群上产生不同的监听端口, 如果使用这个特性, 一旦端口被占用且进程终止
+    代码为 98 EADDRINUSE 则副进程启动时会使用一个新的端口 (+1), 这个特性适合使用随机端口的情况.
+    
+    工作进程如果出现死循环 (同步代码 60 秒未返回), 主进程将杀死它并启动一个新进程.
 
 #### mixer.auto_init(whenLoad [, ext_data]);
 
     如果调用该方法的模块是全局根模块, 则会启动 http 服务
     并读取全局配置文件 (参考 configuration-lib 的 lib.auto_init(...))
     否则不会启动服务, 但会尝试导出 whenLoad 函数. 日志中会有记录.
+    该方法不支持单机集群.
 
 #### app_pool.addApp(serviceApp [, path_string])
 
@@ -189,18 +209,18 @@ function whenLoad(app_pool, exdata, config) {
 
     创建网络工具, http 库不支持传递 header.
 
-#### net.get(_url, parm, cb)
+#### net.get(url, parm, cb)
 
     * 使用 utf8 编码发送 HTTP.GET 请求
-    * _url -- 请求url
+    * url  -- 请求url
     * parm -- 参数对象 JSON
     * cb   -- 完成后的回调: function(err, dataObj)
     * dataObj 使用参考 DATA 包
 
-#### net.post(_url, parm, cb)
+#### net.post(url, parm, cb)
 
     * 使用 utf8 编码发送 HTTP.POST 请求
-    * _url -- 请求url
+    * url  -- 请求url
     * parm -- 参数对象 JSON
     * cb   -- 完成后的回调: function(err, dataObj)
     * dataObj 使用参考 DATA 包
