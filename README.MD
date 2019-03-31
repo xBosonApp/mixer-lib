@@ -7,7 +7,6 @@
 
 `npm install mixer-lib --save`
 
-该项目没有加入 npm 公共服务器, 如需需要请自行搞定..
 
 
 # 配置对象

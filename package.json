@@ -8,7 +8,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "private"
+        "url": "https://github.com/yanmingsohu/mixer-lib"
     },
     "author": "jym",
     "license": "ISC",
